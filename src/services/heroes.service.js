@@ -1,31 +1,34 @@
-import Async from 'react-promise'
+const BASE_URL = "https://api.github.com/users/";
 
-const HEROES = [
-    { id: 11, name: "Mr. Nice" },
-    { id: 12, name: "Narco" },
-    { id: 13, name: "Bombasto" },
-    { id: 14, name: "Celeritas" },
-    { id: 15, name: "Magneta" },
-    { id: 16, name: "RubberMan" },
-    { id: 17, name: "Dynama" },
-    { id: 18, name: "Dr IQ" },
-    { id: 19, name: "Magma" },
-    { id: 20, name: "Tornado" }
-  ];
+/* Retrieve git Hero info by provided username */
+const fetchGitHero = name => 
+  fetch(
+    `${BASE_URL}${name}?access_token=554612bc8de7a1a6744b77055cbab693543d20f0`
+  )
+  .then(status)
+  .then(payload => payload.json())
+  .then(user => user)
+  .catch(error => {
+    return Promise.reject(error);
+  });
+
+/* Retrieve the selected git Hero's Repo's */
+const fetchGitRepos = name => 
+  fetch(
+    `${BASE_URL}${name}/repos?access_token=554612bc8de7a1a6744b77055cbab693543d20f0`
+  )
+  .then(status)
+  .then(payload => payload.json())
+  .then(repos => repos)
+  .catch(error => {
+    return Promise.reject(error);
+  });
+
+  function status(res) {                  // Error Handling
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    return res;
+  };
   
-  const getHeroes = new Promise((resolve, reject) => {
-      resolve(HEROES);
-    });
-    
-    const getHeroesSlowly = new Promise((resolve, reject) => {
-      // Simulate server latency with 2 second delay
-      setTimeout(() => resolve(HEROES), 2000);
-    });
-    
-    const getHeroById = heroId =>
-      new Promise((resolve, reject) => {
-        resolve(HEROES.find(hero => hero.id === heroId));
-      });
-    
-    export { getHeroes, getHeroesSlowly, getHeroById };
-  
+export { fetchGitHero,  fetchGitRepos };

@@ -1,68 +1,41 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { bindActionsCreators, bindActionCreators } from "redux";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import { connect } from "react-redux";
 
 import Heroes from "../Heroes/Heroes";
-import HeroAdd from "../Heroes/HeroAdd";
-import NewHero from "../Heroes/NewHero";
-import HeroesEdit from "../Heroes/HeroesEdit";
 import Dashboard from "../Dashboard/Dashboard";
-
-import * as TodoActions from "../../actions";
+import HeroesForm from "../Heroes/HeroesForm";
+import HeroAdd from "../Heroes/HeroAdd";
 
 import "./App.css";
 
-const App = ({ todos, actions }) => {
-  console.log(todos);
-  console.log(actions);
-  return (
+class App extends Component {
+  state = {};
+
+  render() {
+    return (
       <Router>
-      <div>
-        <h1>Git Tour of Heroes</h1>
-        <nav>
-          <NavLink to="/" activeClassName="active">
-            Dashboard
-          </NavLink>
-          <NavLink to="/heroes" activeClassName="active">
-            Heroes
-          </NavLink>
-          <NavLink to="/newheroes" activeClassName="active">
-            Add a New Hero
-          </NavLink>
-        </nav>
-        <hr />
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/heroes" component={Heroes} />
-        <Route path="/newheroes" component={HeroAdd} />
-        <Route path="/user" component={NewHero} />
-        <Route path={"/heroes/details/:heroid"} component={HeroesEdit} />
-      </div>
+        <div>
+          <h1>Git Tour of Heroes</h1>
+          <nav>
+            <NavLink exact to="/" activeClassName="active">
+              Dashboard
+            </NavLink>
+            <NavLink exact to="/heroes" activeClassName="active">
+              Heroes
+            </NavLink>
+            <NavLink to="/heroes/add" activeClassName="active">
+              Add a Hero
+            </NavLink>
+          </nav>
+          <hr />
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/heroes" component={Heroes} />
+          <Route exact path="/heroes/add" component={HeroAdd} />
+          <Route path={"/heroes/details/:heroid"} component={HeroesForm} />
+        </div>
       </Router>
-  );
-};
+    );
+  }
+}
 
-App.propTypes = {
-  todos: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
-};
-
-const mapStatetoProps = state => ({
-  todos: state.todos
-});
-
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(TodoActions, dispatch)
-});
-
-export default connect(mapStatetoProps, mapDispatchToProps)(App);
-
-
-
-//<Heroes />
-//<Dashboard todos={todos} actions={actions} />
-//<HeroAdd addTodo={actions.addTodo} id={todos.id} />
-//<HeroesEdit editTodo={actions.editTodo} />
-
-//<Route exact path="/" component={Dashboard} />
+export default App;

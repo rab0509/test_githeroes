@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import App from "./components/App/App";
-import rootReducer from "./reducers";
-import "todomvc-app-css/index.css";
+import rootReducer from "./reducers/reducers";
+import "./index.css";
 
 const store = createStore(
   rootReducer /* preloadedState, */,

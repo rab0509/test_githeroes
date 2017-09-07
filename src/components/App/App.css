@@ -27,3 +27,11 @@ h1 {
   nav a.active {
     color: #039be5;
   }
+  .destroy {
+    background-color: red; /* Green */  
+    color: white;
+  }
+  .create {
+    background-color: green; /* Green */  
+    color: white;
+  }
