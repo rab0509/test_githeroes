@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 import Heroes from "../Heroes/Heroes";
 import HeroAdd from "../Heroes/HeroAdd";
+import NewHero from "../Heroes/NewHero";
 import HeroesEdit from "../Heroes/HeroesEdit";
 import Dashboard from "../Dashboard/Dashboard";
 
@@ -35,6 +36,7 @@ const App = ({ todos, actions }) => {
         <Route exact path="/" component={Dashboard} />
         <Route path="/heroes" component={Heroes} />
         <Route path="/newheroes" component={HeroAdd} />
+        <Route path="/user" component={NewHero} />
         <Route path={"/heroes/details/:heroid"} component={HeroesEdit} />
       </div>
       </Router>

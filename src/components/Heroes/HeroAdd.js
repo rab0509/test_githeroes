@@ -10,13 +10,11 @@ export class HeroAdd extends Component {
 
   handleSave = text => {
     if (text.length !== 0) {
-      alert("handleSave entered");
       this.props.addTodo(text);
     }
   };
 
   render() { 
-    //console.log("HeroAdd");
     return (
       <div>
         <header className="header">
